@@ -24,12 +24,22 @@ app.post("/cadastrar", function(req,res){
         data_cadastro: req.body.data_cadastro,
         observacao: req.body.observacao
     }).then(function(){
-        res.send("Dados enviados com sucesso!")
+        res.redirect("/")
     }).catch(function(erro){
         res.send("Falha ao cadastrar: " + erro)
     })
 })
 
+app.get("/consulta", function(req, res){
+    post.findAll().then(function(post){
+        res.render("consulta",{post})
+    }).catch(function(erro){
+        console.log("Erro ao carregar dados do banco: " + erro)
+    })
+})
+
+
+
 app.listen(8081, function(){
-    console.log("Servidor Ativo!")
+    console.log("Servidor ativo!")
 })
